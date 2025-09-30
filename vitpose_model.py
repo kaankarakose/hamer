@@ -10,15 +10,23 @@ from mmpose.apis import inference_top_down_pose_model, init_pose_model, process_
 
 os.environ["PYOPENGL_PLATFORM"] = "egl"
 
-# project root directory
+# project root directory #TODO this is proplem for containers!!!
 ROOT_DIR = "./"
 VIT_DIR = os.path.join(ROOT_DIR, "third-party/ViTPose")
 
+CONTAINER_VIT_CHECKPOINTS= "/weights/hamer/_DATA/vitpose_ckpts"
+CONTAINER_VIT_DIR = "/repo/modules/hamer/third-party/ViTPose"
 class ViTPoseModel(object):
+    # MODEL_DICT = {
+    #     'ViTPose+-G (multi-task train, COCO)': {
+    #         'config': f'{VIT_DIR}/configs/wholebody/2d_kpt_sview_rgb_img/topdown_heatmap/coco-wholebody/ViTPose_huge_wholebody_256x192.py',
+    #         'model': f'{ROOT_DIR}/_DATA/vitpose_ckpts/vitpose+_huge/wholebody.pth',
+    #     },
+    # }
     MODEL_DICT = {
         'ViTPose+-G (multi-task train, COCO)': {
-            'config': f'{VIT_DIR}/configs/wholebody/2d_kpt_sview_rgb_img/topdown_heatmap/coco-wholebody/ViTPose_huge_wholebody_256x192.py',
-            'model': f'{ROOT_DIR}/_DATA/vitpose_ckpts/vitpose+_huge/wholebody.pth',
+            'config': f'{CONTAINER_VIT_DIR}/configs/wholebody/2d_kpt_sview_rgb_img/topdown_heatmap/coco-wholebody/ViTPose_huge_wholebody_256x192.py',
+            'model': f'{CONTAINER_VIT_CHECKPOINTS}/vitpose+_huge/wholebody.pth',
         },
     }
 
