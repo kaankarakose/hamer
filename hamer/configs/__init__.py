@@ -2,7 +2,8 @@ import os
 from typing import Dict
 from yacs.config import CfgNode as CN
 
-CACHE_DIR_HAMER = "/weights/hamer/_DATA" #
+# Use environment variable if set, otherwise fall back to default
+CACHE_DIR_HAMER = os.environ.get('HAMER_WEIGHT_ROOT')
 
 def to_lower(x: Dict) -> Dict:
     """

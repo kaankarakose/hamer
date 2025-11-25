@@ -10,25 +10,24 @@ from mmpose.apis import inference_top_down_pose_model, init_pose_model, process_
 
 os.environ["PYOPENGL_PLATFORM"] = "egl"
 
-# project root directory #TODO this is proplem for containers!!!
-ROOT_DIR = "./"
-VIT_DIR = os.path.join(ROOT_DIR, "third-party/ViTPose")
+# project root directory
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+VIT_DIR = os.path.join(SCRIPT_DIR, "third-party/ViTPose")
+HAMER_WEIGHT_ROOT = os.environ.get('HAMER_WEIGHT_ROOT')
 
-CONTAINER_VIT_CHECKPOINTS= "/weights/hamer/_DATA/vitpose_ckpts"
-CONTAINER_VIT_DIR = "/repo/modules/hamer/third-party/ViTPose"
 class ViTPoseModel(object):
-    # MODEL_DICT = {
-    #     'ViTPose+-G (multi-task train, COCO)': {
-    #         'config': f'{VIT_DIR}/configs/wholebody/2d_kpt_sview_rgb_img/topdown_heatmap/coco-wholebody/ViTPose_huge_wholebody_256x192.py',
-    #         'model': f'{ROOT_DIR}/_DATA/vitpose_ckpts/vitpose+_huge/wholebody.pth',
-    #     },
-    # }
     MODEL_DICT = {
         'ViTPose+-G (multi-task train, COCO)': {
-            'config': f'{CONTAINER_VIT_DIR}/configs/wholebody/2d_kpt_sview_rgb_img/topdown_heatmap/coco-wholebody/ViTPose_huge_wholebody_256x192.py',
-            'model': f'{CONTAINER_VIT_CHECKPOINTS}/vitpose+_huge/wholebody.pth',
+            'config': f'{VIT_DIR}/configs/wholebody/2d_kpt_sview_rgb_img/topdown_heatmap/coco-wholebody/ViTPose_huge_wholebody_256x192.py',
+            'model': f'{HAMER_WEIGHT_ROOT}/vitpose_ckpts/vitpose+_huge/wholebody.pth',
         },
     }
+    # MODEL_DICT = {
+    #     'ViTPose+-G (multi-task train, COCO)': {
+    #         'config': f'{CONTAINER_VIT_DIR}/configs/wholebody/2d_kpt_sview_rgb_img/topdown_heatmap/coco-wholebody/ViTPose_huge_wholebody_256x192.py',
+    #         'model': f'{CONTAINER_VIT_CHECKPOINTS}/vitpose+_huge/wholebody.pth',
+    #     },
+    # }
 
     def __init__(self, device: str | torch.device):
         self.device = torch.device(device)
