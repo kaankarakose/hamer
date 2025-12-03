@@ -17,7 +17,7 @@ token_channel.csv
 
 mano_v1_2/
 
-
+*.tar.gz
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
